@@ -1,10 +1,10 @@
 const express = require("express");
-const notes = require('./data/notes');
 const dotenv = require('dotenv');
 const cors = require('cors')
 const app = express();
 const connectDB = require('./config/db');
 const userRoutes = require('./routes/userRoutes')
+const noteRoutes = require('./routes/noteRoutes')
 const { notFound, errorHandler } = require('./middlewares/errorMiddleware')
 
 
@@ -21,11 +21,12 @@ app.get('/', (req, res) => {
 });
 
 // Get all notes 
-app.get("/api/notes", (req, res) => {
-    res.json(notes)
-});
+// app.get("/api/notes", (req, res) => {
+//     res.json(notes)
+// });
 
 app.use('/api/users', userRoutes)
+app.use('/api/notes', noteRoutes)
 app.use(notFound);
 app.use(errorHandler);
 
